@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<head>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>Company Directory</title>
+				
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+		<link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+		<link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+		<link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">	
+
+	</head>
+
+	<body>
+
+		<main>
+
+			<div class="container">
+
+				<div class="row" id="block0">
+
+					<div class="col-md-12 main">
+
+						<div class="block1">
+
+                        	<div id="nav" class="CharacterContainer"></div>
+
+						</div>
+
+
+						<div class="block2"> 
+							
+							<div id="searchData" class="search">
+
+								<table id="tableButton">
+								
+									<tbody id="buttonsTop">
+
+										<tr id="buttonTop">
+
+											<td id="buttonFilter">
+
+												<select class="filterSelect">
+
+													<option value="filterBy">Filter by</option>
+													<option value="lastName">Last Name</option>
+													<option value="firstName">First Name</option>
+													<option value="department">Department</option>
+													<option value="location">Location</option>
+						
+												</select>
+
+											</td>
+
+											<td id="buttonSearch">
+												
+												<form class="ui-filterable">
+
+													<input class="form-control" id="searchBar" onkeypress="search(event)" type="text" placeholder="Search using the filters">
+		
+												</form>
+													
+											</td>
+
+											<td id="buttonNew" onclick="toggleAddEmployee()"><i id="buttonNewData" class="fas fa-plus-circle fa-xs" view="" type="button" data-toggle="modal"></i></td>
+											
+										</tr>
+
+									</tbody>
+
+								</table>
+							
+							</div>
+	    
+						</div>
+
+						<div class="block3"> 
+
+							<div class="row style-alt" id="database"></div>
+
+						</div>
+
+						<div class="controls">
+							
+							<a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top" role="button"><i class="fas fa-chevron-up"></i></a>
+
+							<br>
+							
+							<a onclick="toggleModifyDepLoc()"><i class="fas fa-cog"></i></a>
+
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+		</main>
+
+
+<!-------------------------------------------------------------------------------->
+
+
+		<!--PROFILE PAGE-->
+		<div class="modal" id="profilePage">
+					
+			<div class="row ng-scope profile" id="profile">
+
+				<div class="text-right">
+
+					<button class="button buttonClose" onclick="returnToTable()"><i class="fa fa-times-circle fa-xs"></i></button> 
+				
+				</div>
+
+				<div class="col-md-4">
+					
+					<div class="panel panel-default">
+
+						<div class="panel-body text-center profileTitle" id="displayName">
+							
+							<img class="center-block img-responsive img-circle img-thumbnail thumb96 animation-fadeIn" src="img/user-regulars.svg" alt="User">
+							<h3 class="m0 text-bold"></h3>
+						
+						</div>
+
+					</div>
+
+					<div class="panel panel-default hidden-xs hidden-sm users">
+
+						<div class="panel-heading">
+
+							<div class="panel-title text-center">Employees</div>
+
+						</div>
+
+						<div class="panel-body2">
+
+							<div id="databaseUsers"></div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="col-md-8">
+
+					<div class="panel panel-default">
+						
+						<div class="panel-body">
+							
+							<div class="panel-title text-center">Employee Information</div>
+
+							<br>
+							
+							<div class="row pv-lg information" id="information">
+
+								<div class="col-lg-12">
+									
+									<form class="form-horizontal ng-pristine ng-valid userInfo" id="userInfo">
+										
+										<div class="row profileRow" style="display: none;">
+										
+											<label class="col-sm-4" style="float: left;">ID:</label>
+											<span class="col-sm-4 findId" style="color: black; float: right;" id="id"></span>
+										
+										</div>
+										
+										<div class="row profileRow">
+										
+											<label class="col-sm-4" style="float: left;" for="firstName">First Name:</label>
+											<span class="col-sm-4" style="color: black; float: right;" id="firstName"></span>
+										
+										</div>
+										
+										<div class="row profileRow">
+										
+											<label class="col-sm-4" style="float: left;" for="lastName">Last Name:</label>
+											<span class="col-sm-4" style="color: black; float: right;" id="lastName"></span>
+										
+										</div>
+										
+										<div class="row profileRow">
+										
+											<label class="col-sm-4" style="float: left;" for="email">Email:</label>
+											<a href="mailto:" class="col-sm-4" style="color: black; float: right;" id="email"></a>
+											
+										</div>
+										
+										<div class="row profileRow">
+										
+											<label class="col-sm-4" style="float: left;" for="department">Department:</label>
+											<span class="col-sm-4" style="color: black; float: right;" id="department"></span>
+											
+										</div>
+										
+										<div class="row profileRow">
+										
+											<label class="col-sm-4" style="float: left;" for="location">Location:</label>
+											<span class="col-sm-4" style="color: black; float: right;" id="location"></span>
+											
+										</div>
+										
+									</form>
+									
+									<br>
+
+									<div class="buttons">
+
+										<div class="btn btn-xs btn-primary3" id="editButton" style="display: inline" onclick="editProfile()"><i class="fa fa-pencil fa-xs" aria-hidden="true" view="" type="button" data-toggle="modal"></i> </div>
+
+										<div class="btn deleteEmployee" id="deleteEmployee" style="display: inline" onclick="toggleConfirm('Remove this employee?', 'deleteEmployee()')"><i class="fas fa-minus-circle fa-xs" aria-hidden="true" view="" type="button" data-toggle="modal"></i></div>
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+
+
+			<!--CONFIRM/DELETE BUTTON-->
+
+			<div class="modal" id="confirm">
+
+				<div id="confirmQuestion">
+	
+					<div class="popup row shadow-lg p-3 mb-5 bg-white">
+	
+						<div class="col-12 d-flex align-items-center">
+	
+							<p><span id="confirmMessage"></span></p>
+	
+						</div>
+						
+						<div class="col-12 confirmEmployee">
+	
+							<div class="btn btn-xs btn-primary5" id="confirmButton"><i class="fa fa-check-circle fa-xs" aria-hidden="true" view="" type="button" data-toggle="modal"></i></div>
+	
+							<div class="btn btn-xs btn-primary6" onclick="toggleConfirm()"><i class="fa fa-times-circle fa-xs" aria-hidden="true" view="" type="button" data-toggle="modal"></i></div>
+						
+						</div>
+					
+					</div>
+				
+				</div>
+	
+				<div id="confirmResponse">
+	
+					<div class="popup row shadow-lg p-3 mb-5 bg-white">
+						
+						<div class="col-12 d-flex align-items-center">
+						
+							<p><span id="confirmResponseMessage"></span></p>
+						
+						</div>
+					
+					</div>
+				
+				</div>
+	
+			</div>
+	
+			
+		</div>
+
+
+		<!-------------------------------------------------------------------------------->
+
+
+		<!--ADD PROFILE-->
+		<div class="modal" id="addEmployeeOverlay">
+				
+			<div class="text-right">
+
+				<button class="button buttonClose" onclick="returnToTable()"><i class="fa fa-times-circle fa-xs" aria-hidden="true" view="" type="button" data-toggle="modal"></i></button> 
+					
+			</div>
+
+			<div class="col-md-4">
+
+				<div class="panel panel-default">
+
+					<img class="center-block img-responsive img-circle img-thumbnail thumb96" src="img/user-regulars.svg" alt="User">
+					<h3 class="m0 text-bold"></h3>
+
+				</div>
+
+			</div>
+			
+			<div class="col-md-8">
+
+				<div class="panel panel-default">
+
+					<div class="panel-body">
+						
+						<div class="h4 text-center">Add Employee</div>
+
+						<br>
+						<br>
+						
+						<div class="row pv-lg">
+
+							<div class="col-lg-2"></div>
+
+							<div class="col-lg-8">
+								
+								<form class="form-horizontal ng-pristine ng-valid" id="addForm" onsubmit="addEmployee()">
+
+									<div class="form-group profileRow">
+									
+										<label class="col-sm-2 control-label" for="firstName">First Name</label>
+									
+										<div class="col-sm-10">
+									
+											<input type="text" class="form-control" id="addEmployeeFirstName" placeholder="First Name" required/>
+									
+										</div>
+									
+									</div>
+									
+									<div class="form-group profileRow">
+									
+										<label class="col-sm-2 control-label" for="lastName">Last Name</label>
+									
+										<div class="col-sm-10">
+									
+											<input type="text" class="form-control" id="addEmployeeLastName" placeholder="Last Name" required/>
+									
+										</div>
+									
+									</div>
+									
+									<div class="form-group profileRow">
+									
+										<label class="col-sm-2 control-label" for="email">Email</label>
+									
+										<div class="col-sm-10">
+									
+											<input type="email" class="form-control" id="addEmployeeEmail" name="email" placeholder="Email" required/>
+									
+										</div>
+									
+									</div>
+									
+									<div class="form-group profileRow">
+									
+										<label class="col-sm-2 control-label" for="department">Department</label>
+									
+										<div class="col-sm-10">
+									
+											<select id="addEmployeeDepartment"></select>
+									
+										</div>
+									
+									</div>
+									
+									<div class="form-group profileRow">
+									
+										<label class="col-sm-2 control-label" for="location">Location</label>
+									
+										<div class="col-sm-10">
+									
+											<select id="addEmployeeLocation"></select>
+									
+										</div>
+									
+									</div>
+									
+									<div class="form-group">
+									
+										<div class="col-sm-offset-2 col-sm-10">
+				
+											<button type="submit" class="btn btn-xs btn-primary4 submit-button"><i class="fa fa-check-circle fa-xs" aria-hidden="true" view="" type="button" data-toggle="modal"></i></button>
+									
+										</div>
+									
+									</div>
+									
+								</form>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+		<!-------------------------------------------------------------------------------->
+
+
+		<!--UPDATE DEP/LOC-->
+
+
+		<div class="modal" id="modifyDepLoc">
+            
+			<div class="add1 d-flex align-items-right justify-content-right">
+			
+				<button class="button buttonClose" onclick="toggleModifyDepLoc()"><i class="fa fa-times-circle fa-xs"></i></button> 
+			
+			</div>   
+		
+			<br>
+		
+			<div class="row addRemove">
+				
+				<div class="add2 d-flex justify-content-center row m-auto">
+					
+					<div class="deplocTitle">
+							
+						<h3 style="display: inline">Department</h3>
+						
+						<div class="btn" id="buttonNew2" style="display: inline; float: right;" onclick="toggleAddDepartment()"><i class="fas fa-plus-circle fa-xs" view="" type="button" style="font-size: 0.63em;" data-toggle="modal"></i></div>
+						
+						<div class="btn" id="deleteEmployee2" style="display: inline; float: right;" onclick="toggleRemoveDepartment()"><i class="fas fa-minus-circle fa-xs" view="" type="button" data-toggle="modal"></i></div>
+					
+					</div>
+				
+				</div>
+			
+				<br>
+		
+				<div class="add3 d-flex justify-content-center row m-auto">
+					
+					<div class="deplocTitle">
+		
+						<h3 style="display: inline">Location</h3>
+						
+						<div class="btn" id="buttonNew2" style="display: inline; float: right;" onclick="toggleAddLocation()"><i class="fas fa-plus-circle fa-xs" view="" type="button" style="font-size: 0.63em;" data-toggle="modal"></i></div>
+						
+						<div class="btn" id="deleteEmployee2" style="display: inline; float: right;" onclick="toggleRemoveLocation()"><i class="fas fa-minus-circle fa-xs" view="" type="button" data-toggle="modal"></i></div>
+					
+					</div>
+		
+				</div>
+		
+			</div>
+		 
+		</div>
+
+		<div class="modal" id="addDepartmentOverlay">
+            
+			<div class="addDepLoc">
+		
+				<div class="row profileRow">
+				
+					<h3 style="display: inline">Department:</h3>
+					<input id="addDepartmentDepartment" style="display: inline; float: right;">
+		
+				</div>
+
+				<br>
+
+				<div class="row profileRow">
+
+					<h3 style="display: inline">Location:</h3>
+					<select id="addDepartmentLocation" style="display: inline; float: right;"></select>
+
+				</div>
+		
+				<br>
+
+				<div class="row d-flex align-items-center justify-content-center pt-3" id="addDepLocBtn">
+		
+					<div class="col d-flex justify-content-center">
+		
+						<button class="button buttonClose" style="display: inline; float: left;" onclick="toggleAddDepartment()"><i class="fa fa-times-circle fa-xs" style="font-size: 0.9em;"></i></button> 
+		
+					</div>
+		
+					<div class="col d-flex justify-content-center">
+		
+						<div class="btn btn-xs btn-primary5" id="confirmButton" style="display: inline; float: right;" onclick="toggleConfirmDep('Add this department?', 'addDepartment()')"><i class="fa fa-check-circle fa-xs" aria-hidden="true" view="" type="button" style="font-size: 1em;" data-toggle="modal"></i></div>
+		
+					</div>
+		
+				</div>
+		
+			</div>
+		
+		</div>
+
+		<div class="modal" id="removeDepartmentOverlay">
+
+			<div class="addDepLoc">
+
+				<div class="row profileRow">
+
+					<h3 style="display: inline">Department:</h3>
+					<select id="removeDepartmentDepartment" style="display: inline; float: right;"></select>
+				
+				</div>
+				
+				<br>
+				<br>
+
+				<div class="row d-flex align-items-center justify-content-center pt-3" id="removeDepLocBtn">
+				
+					<div class="col d-flex justify-content-center">
+
+						<button class="button buttonClose" style="display: inline; float: left;" onclick="toggleRemoveDepartment()"><i class="fa fa-times-circle fa-xs" style="font-size: 0.9em;"></i></button> 
+
+					</div>
+
+					<div class="col d-flex justify-content-center">
+
+						<div class="btn btn-xs btn-primary5" id="confirmButton" style="display: inline; float: right;" onclick="toggleConfirmDep('Remove', 'removeDepartment()')"><i class="fa fa-check-circle fa-xs" aria-hidden="true" view="" type="button" style="font-size: 1em;" data-toggle="modal"></i></div>
+
+					</div>
+
+				</div>
+				
+			</div>
+
+		</div>
+
+		<div class="modal" id="confirmDep">
+
+			<div id="depQuestion">
+		
+				<div class="popup row shadow-lg p-3 mb-5 bg-white">
+		
+					<div class="col-12 d-flex align-items-center">
+		
+						<p><span id="depMessage"></span></p>
+		
+					</div>
+					
+					<div class="col-12 depConfirm">
+		
+						<div class="btn btn-xs btn-primary5" id="depButton"><i class="fa fa-check-circle fa-xs" aria-hidden="true" view="" type="button" data-toggle="modal"></i></div>
+		
+						<div class="btn btn-xs btn-primary6" onclick="toggleConfirmDep()"><i class="fa fa-times-circle fa-xs" aria-hidden="true" view="" type="button" data-toggle="modal"></i></div>
+					
+					</div>
+				
+				</div>
+			
+			</div>
+		
+			<div id="depResponse">
+		
+				<div class="popup row shadow-lg p-3 mb-5 bg-white">
+					
+					<div class="col-12 d-flex align-items-center">
+					
+						<p><span id="depResponseMessage"></span></p>
+					
+					</div>
+				
+				</div>
+			
+			</div>
+		
+		</div>
+
+		<div class="modal" id="addLocationOverlay">
+
+			<div class="addDepLoc">
+				
+				<div class="row profileRow">
+		
+					<h3 style="display: inline">Location:</h3>
+					<input id="addLocationLocation" style="display: inline; float: right;">
+				
+				</div>
+		
+				<br>
+				<br>
+		
+				<div class="row d-flex align-items-center justify-content-center pt-3" id="addDepLocBtn">
+				
+					<div class="col d-flex justify-content-center">
+		
+						<button class="button buttonClose" style="display: inline; float: left;" onclick="toggleAddLocation()"><i class="fa fa-times-circle fa-xs" style="font-size: 0.9em;"></i></button> 
+		
+					</div>
+		
+					<div class="col d-flex justify-content-center">
+		
+						<div class="btn btn-xs btn-primary5" id="confirmButton" style="display: inline; float: right;" onclick="toggleConfirmLoc('Add this location?', 'addLocation()')"><i class="fa fa-check-circle fa-xs" aria-hidden="true" view="" type="button" style="font-size: 1em;" data-toggle="modal"></i></div>
+		
+					</div>
+		
+				</div>
+			
+			</div>
+		
+		</div>
+
+		<div class="modal" id="removeLocationOverlay">
+
+			<div class="addDepLoc">
+
+				<div class="row profileRow">
+
+					<h3 style="display: inline">Location:</h3>
+					<select id="removeLocationLocation" style="display: inline; float: right;"></select>
+				
+				</div>
+				
+				<br>
+				<br>
+
+				<div class="row d-flex align-items-center justify-content-center pt-3" id="removeDepLocBtn">
+				
+					<div class="col d-flex justify-content-center">
+
+						<button class="button buttonClose" style="display: inline; float: left;" onclick="toggleRemoveLocation()"><i class="fa fa-times-circle fa-xs" style="font-size: 0.9em;"></i></button> 
+
+					</div>
+
+					<div class="col d-flex justify-content-center">
+
+						<div class="btn btn-xs btn-primary5" id="confirmButton" style="display: inline; float: right;" onclick="toggleConfirmLoc('Remove', 'removeLocation()')"><i class="fa fa-check-circle fa-xs" aria-hidden="true" view="" type="button" style="font-size: 1em;" data-toggle="modal"></i></div>
+
+					</div>
+
+				</div>
+				
+			</div>
+
+		</div>
+
+		<div class="modal" id="confirmLoc">
+
+			<div id="locQuestion">
+		
+				<div class="popup row shadow-lg p-3 mb-5 bg-white">
+		
+					<div class="col-12 d-flex align-items-center">
+		
+						<p><span id="locMessage"></span></p>
+		
+					</div>
+					
+					<div class="col-12 locConfirm">
+		
+						<div class="btn btn-xs btn-primary5" id="locButton"><i class="fa fa-check-circle fa-xs" aria-hidden="true" view="" type="button" data-toggle="modal"></i></div>
+		
+						<div class="btn btn-xs btn-primary6" onclick="toggleConfirmLoc()"><i class="fa fa-times-circle fa-xs" aria-hidden="true" view="" type="button" data-toggle="modal"></i></div>
+					
+					</div>
+				
+				</div>
+			
+			</div>
+		
+			<div id="locResponse">
+		
+				<div class="popup row shadow-lg p-3 mb-5 bg-white">
+					
+					<div class="col-12 d-flex align-items-center">
+					
+						<p><span id="locResponseMessage"></span></p>
+					
+					</div>
+				
+				</div>
+			
+			</div>
+		
+		</div>
+
+
+	<!-------------------------------------------------------------------------------->
+
+
+		<script src="vendor/jquery/jquery-3.5.1.js"></script>
+		<script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+
+		<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+		<script src="js/sb-admin-2.min.js"></script>
+		<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+		<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+		
+		<script type="text/javascript" src="js/script.js"></script>
+
+	</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
