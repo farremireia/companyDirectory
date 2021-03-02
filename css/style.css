@@ -701,7 +701,7 @@ display: inline;
 
 .modal{
     background: #f5f7fa !important;
-    border: 1px solid #eaedf1 !important;
+    border: 2px solid #767777 !important;
     
 }
 .panel.panel-default {
@@ -750,13 +750,14 @@ ul {
 }
 
 #confirm, #confirmDep, #confirmLoc {
-height: 100px !important;
-width: 150px !important;
-border-radius: 10px !important;
-align-items: center !important;
-margin-left: 38% !important;
-margin-top: 20% !important;
-position: absolute !important;
+    height: 100px !important;
+    width: 150px !important;
+    border-radius: 10px !important;
+    align-items: center !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
 }
 
 .popup {
@@ -779,19 +780,30 @@ line-height: 60px;
 width: 250px !important;
 border-radius: 10px !important;
 align-items: center !important;
-margin-left: 28% !important;
-margin-top: 20% !important;
 position: absolute !important;
+top: 50% !important;
+left: 50% !important;
+transform: translate(-50%, -50%) !important;
   }
-
-  #addDepartmentOverlay, #removeDepartmentOverlay, #addLocationOverlay, #removeLocationOverlay {
+  #addDepartmentOverlay {
+    height: 200px !important;
+    width: 300px !important;
+    border-radius: 10px !important;
+    align-items: center !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+  #removeDepartmentOverlay, #addLocationOverlay, #removeLocationOverlay {
     height: 180px !important;
     width: 300px !important;
     border-radius: 10px !important;
     align-items: center !important;
-    margin-left: 28% !important;
-    margin-top: 20% !important;
     position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
   }
 .add1 {
     text-align: right !important;
@@ -808,7 +820,7 @@ h3 {
 }
 
 #addDepartmentOverlay .addDepLoc {
-    margin-top: 50px !important;
+    margin-top: 40px !important;
     margin-left: 14% !important;
     width: 70% !important;
 }
@@ -831,7 +843,7 @@ h3 {
     width: 70% !important;
 }
 
-#removeDepartmentDepartment {
+#removeDepartmentDepartment, #removeLocationLocation, #addDepartmentDepartment, #addDepartmentLocation, #addLocationLocation {
     width: 60% !important;
 }
 

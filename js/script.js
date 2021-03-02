@@ -440,16 +440,16 @@ function editProfile() {
 
             if (i < 4) {
 
-                entry.replaceWith(`<input id='${id}' placeholder='${entryText}' style="float: right !important;">`)
+                entry.replaceWith(`<input id='${id}' placeholder='${entryText}' style="float: right !important; width: 30% !important">`)
 
             }  else {
 
-                entry.replaceWith(`<select onchange="updateLocation()" id='${id}' style="float: right !important;"></select>`)
+                entry.replaceWith(`<select onchange="updateLocation()" id='${id}' style="float: right !important; width: 30% !important"></select>`)
 
                 var category = capitalizeFirstLetter(id)
                 populateSelectOptions(category, id)
 
-                $(`#${id}`).append(`<option selected="true">${entryText}</option>`)
+                $(`#${id}`).append(`<option selected="true" width: 30% !important">${entryText}</option>`)
     
             }
 
@@ -883,15 +883,20 @@ function toggleConfirmDep(message, func) {
         $('#depQuestion').show()
         $('#depResponse').hide()
 
-        
+        let addOrRemove = capitalizeFirstLetter(message.split(" ")[0])
+        addOrRemove == "Add" ? addOrRemove += "ed" : addOrRemove += "d"
 
         $('#depMessage').text(message)
         $('#depButton').attr('onClick', `
             ${func.toString()};
             $('#depQuestion').hide()
             $('#depResponse').show()
+            
+            
             $('#depResponseMessage').text('${addOrRemove}')
+            
 
+            
             setTimeout(function(){
                 $('#confirmDep').hide();
                 
