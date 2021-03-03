@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" class="h-100">
 
 	<head>
 
@@ -20,7 +20,7 @@
 	<body>
 
 		<main>
-
+			
 			<div class="container">
 
 				<div class="row" id="block0">
@@ -44,27 +44,38 @@
 
 										<tr id="buttonTop">
 
-											<td id="buttonFilter">
-
-												<select class="filterSelect">
-
-													<option value="filterBy">Filter by</option>
-													<option value="lastName">Last Name</option>
-													<option value="firstName">First Name</option>
-													<option value="department">Department</option>
-													<option value="location">Location</option>
-						
-												</select>
-
-											</td>
-
 											<td id="buttonSearch">
-												
-												<form class="ui-filterable">
 
-													<input class="form-control" id="searchBar" onkeypress="search(event)" type="text" placeholder="Search using the filters">
-		
-												</form>
+												<form class="form-horizontal">
+													<fieldset>
+													
+													<div class="form-group">
+													  <div class="col-md-12">
+														<div class="input-group">
+
+															<div class="input-group-btn buttonFilter">
+																
+																<select type="button" class="btn btn-default dropdown-toggle filterSelect" style="width: 95px" data-toggle="dropdown">
+																	Filter by
+																  <span class="caret"></span>
+
+																	<option value="filterBy">Filter by</option>
+																	<option value="lastName">Last Name</option>
+																	<option value="firstName">First Name</option>
+																	<option value="department">Department</option>
+																	<option value="location">Location</option>
+										
+																</select>
+															  </div>
+															  
+															<input class="form-control" id="searchBar" onkeypress="search(event)" type="text" placeholder="Search using the filters">
+														  
+														</div>
+													  </div>
+													</div>
+													
+													</fieldset>
+													</form>
 													
 											</td>
 
@@ -79,6 +90,8 @@
 							</div>
 	    
 						</div>
+
+						<h1>Directory</h1>
 
 						<div class="block3"> 
 
@@ -125,7 +138,7 @@
 						<div class="panel-body text-center profileTitle" id="displayName">
 							
 							<img class="center-block img-responsive img-circle img-thumbnail thumb96 animation-fadeIn" src="img/user-regulars.svg" alt="User">
-							<h3 class="m0 text-bold"></h3>
+							<h3 class="m0"></h3>
 						
 						</div>
 
@@ -159,58 +172,68 @@
 
 							<br>
 							
-							<div class="row pv-lg information" id="information">
+							<div class="information" id="information">
 
 								<div class="col-lg-12">
-									
+
 									<form class="form-horizontal ng-pristine ng-valid userInfo" id="userInfo">
+
+										<div class="form-group" style="display: none;">
 										
-										<div class="row profileRow" style="display: none;">
-										
-											<label class="col-sm-4" style="float: left;">ID:</label>
-											<span class="col-sm-4 findId" style="color: black; float: right;" id="id"></span>
-										
+											<label class="col-sm-4">ID:</label>
+											<div class="col-md-6">
+
+											<span class="col-sm-4 findId" id="id"></span>
+											</div>
+
 										</div>
 										
-										<div class="row profileRow">
-										
-											<label class="col-sm-4" style="float: left;" for="firstName">First Name:</label>
-											<span class="col-sm-4" style="color: black; float: right;" id="firstName"></span>
-										
-										</div>
-										
-										<div class="row profileRow">
-										
-											<label class="col-sm-4" style="float: left;" for="lastName">Last Name:</label>
-											<span class="col-sm-4" style="color: black; float: right;" id="lastName"></span>
-										
-										</div>
-										
-										<div class="row profileRow">
-										
-											<label class="col-sm-4" style="float: left;" for="email">Email:</label>
-											<a href="mailto:" class="col-sm-4" style="color: black; float: right;" id="email"></a>
+										<!-- Text input-->
+										<div class="form-group">
+										  <label class="col-md-4" for="firstName">First Name</label>  
+										  <div class="col-md-6">
+										  <span id="firstName"></span>
 											
+										  </div>
 										</div>
+
 										
-										<div class="row profileRow">
-										
-											<label class="col-sm-4" style="float: left;" for="department">Department:</label>
-											<span class="col-sm-4" style="color: black; float: right;" id="department"></span>
+										<!-- Text input-->
+										<div class="form-group">
+										  <label class="col-md-4" for="lastName">Last Name</label>  
+										  <div class="col-md-6">
+										  <span id="lastName"></span>
 											
+										  </div>
 										</div>
 										
-										<div class="row profileRow">
-										
-											<label class="col-sm-4" style="float: left;" for="location">Location:</label>
-											<span class="col-sm-4" style="color: black; float: right;" id="location"></span>
+										<!-- Text input-->
+										<div class="form-group">
+										  <label class="col-md-4" for="email">Email</label>  
+										  <div class="col-md-6">
+										  <a href="mailto:" id="email"></a>
 											
+										  </div>
 										</div>
 										
+										<!-- Select Basic -->
+										<div class="form-group">
+										  <label class="col-md-4" for="department">Department</label>
+										  <div class="col-md-6">
+											<span id="department"></span>
+										  </div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-md-4" for="location">Location</label>
+											<div class="col-md-6">
+											  <span id="location"></span>
+											</div>
+										  </div>
+				
 									</form>
 									
-									<br>
-
+									
 									<div class="buttons">
 
 										<div class="btn btn-xs btn-primary3" id="editButton" style="display: inline" onclick="editProfile()"><i class="fa fa-pencil fa-xs" aria-hidden="true" view="" type="button" data-toggle="modal"></i> </div>
@@ -296,7 +319,7 @@
 				<div class="panel panel-default">
 
 					<img class="center-block img-responsive img-circle img-thumbnail thumb96" src="img/user-regulars.svg" alt="User">
-					<h3 class="m0 text-bold"></h3>
+					<h3 class="m0"></h3>
 
 				</div>
 
@@ -306,78 +329,59 @@
 
 				<div class="panel panel-default">
 
-					<div class="panel-body">
+					<form class="form-horizontal" id="addForm" onsubmit="addEmployee()">
+						<fieldset>
 						
-						<div class="h4 text-center">Add Employee</div>
-
+						<!-- Form Name -->
+						<legend class="h4 text-center">Add Employee</legend>
 						<br>
-						<br>
 						
-						<div class="row pv-lg">
-
-							<div class="col-lg-2"></div>
-
-							<div class="col-lg-8">
-								
-								<form class="form-horizontal ng-pristine ng-valid" id="addForm" onsubmit="addEmployee()">
-
-									<div class="form-group profileRow">
-									
-										<label class="col-sm-2 control-label" style="float: left;" for="firstName">First Name</label>
-									
-										<input type="text" class="form-control" id="addEmployeeFirstName" style="float: right !important; width: 30% !important" placeholder="First Name" required/>
-									
-									</div>
-									
-									<div class="form-group profileRow">
-									
-										<label class="col-sm-2 control-label" style="float: left;" for="lastName">Last Name</label>
-									
-										<input type="text" class="form-control" id="addEmployeeLastName" style="float: right !important; width: 30% !important" placeholder="Last Name" required/>
-									
-									</div>
-									
-									<div class="form-group profileRow">
-									
-										<label class="col-sm-2 control-label" style="float: left;" for="email">Email</label>
+						<!-- Text input-->
+						<div class="form-group">
+						  <label class="col-md-4 control-label" for="firstName">First Name</label>  
+						  <div class="col-md-6">
+						  <input id="addEmployeeFirstName" name="firstName" type="text" placeholder="Enter First Name" class="form-control input-md" required="">
+							
+						  </div>
+						</div>
 						
-										<input type="email" class="form-control" id="addEmployeeEmail" style="float: right !important; width: 30% !important" name="email" placeholder="Email" required/>
-
-									</div>
-									
-									<div class="form-group profileRow">
-									
-										<label class="col-sm-2 control-label" style="float: left;" for="department">Department</label>
-
-										<select id="addEmployeeDepartment" style="float: right !important; width: 30% !important"></select>
-			
-									</div>
-									
-									<div class="form-group profileRow">
-									
-										<label class="col-sm-2 control-label" style="float: left;" for="location">Location</label>
-
-										<select id="addEmployeeLocation" style="float: right !important; width: 30% !important"></select>
-
-									</div>
-									
-									<div class="form-group">
-									
-										<div class="col-sm-offset-2 col-sm-10">
-				
-											<button type="submit" class="btn btn-xs btn-primary4 submit-button"><i class="fa fa-check-circle fa-xs" aria-hidden="true" view="" type="button" data-toggle="modal"></i></button>
-									
-										</div>
-									
-									</div>
-									
-								</form>
-
-							</div>
-
+						<!-- Text input-->
+						<div class="form-group">
+						  <label class="col-md-4 control-label" for="lastName">Last Name</label>  
+						  <div class="col-md-6">
+						  <input id="addEmployeeLastName" name="lastName" type="text" placeholder="Enter Last Name" class="form-control input-md" required="">
+							
+						  </div>
+						</div>
+						
+						<!-- Text input-->
+						<div class="form-group">
+						  <label class="col-md-4 control-label" for="email">Email</label>  
+						  <div class="col-md-6">
+						  <input id="addEmployeeLastEmail" name="email" type="text" placeholder="Enter Email" class="form-control input-md" required="">
+							
+						  </div>
+						</div>
+						
+						<!-- Select Basic -->
+						<div class="form-group">
+						  <label class="col-md-4 control-label" for="department">Department</label>
+						  <div class="col-md-6">
+							<select id="addEmployeeDepartment" name="department" class="form-control"></select>
+						  </div>
 						</div>
 
-					</div>
+						<div class="form-group">	
+							
+							<button type="submit" class="btn btn-xs submit-button"><i class="fa fa-check-circle fa-xs" aria-hidden="true" view="" type="button" data-toggle="modal"></i></button>
+												
+						</div>
+
+
+
+						
+						</fieldset>
+						</form>
 
 				</div>
 
@@ -451,7 +455,7 @@
 
 				<br>
 
-				<div class="row profileRow">
+				<div class="row profileRow" style="display: none">
 
 					<h3 style="display: inline">Location:</h3>
 					<select id="addDepartmentLocation" style="display: inline; float: right;"></select>

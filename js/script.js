@@ -438,7 +438,7 @@ function editProfile() {
 
         for (let i = 1; i < 5; i++) {
             
-            let entry = $('#userInfo').children().eq(i).children().eq(1);
+            let entry = $('#userInfo').children().eq(i).children().eq(1).children();
             let entryText = entry.text();
             let id = entry.attr('id')
 
@@ -446,16 +446,16 @@ function editProfile() {
 
             if (i < 4) {
 
-                entry.replaceWith(`<input id='${id}' placeholder='${entryText}' style="float: right !important; width: 30% !important">`)
+                entry.replaceWith(`<input id='${id}' placeholder='${entryText}' class="form-control input-md">`)
 
             }  else {
 
-                entry.replaceWith(`<select onchange="updateLocation()" id='${id}' style="float: right !important; width: 30% !important"></select>`)
+                entry.replaceWith(`<select onchange="updateLocation()" id='${id}' class="form-control input-md"></select>`)
 
                 var category = capitalizeFirstLetter(id)
                 populateSelectOptions(category, id)
 
-                $(`#${id}`).append(`<option selected="true" width: 30% !important">${entryText}</option>`)
+                $(`#${id}`).append(`<option selected="true" class="form-control input-md>${entryText}</option>`)
     
             }
 
