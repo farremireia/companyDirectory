@@ -295,22 +295,28 @@ function addLocation() {
 
     let locationName = $('#addLocationLocation').val()
 
-    $.ajax({
+    $.getJSON(`php/getAllLocations.php`, function (locations) {
 
-        data: {
-            'name': locationName
-        },
-        url: 'php/insertLocation.php', 
-        dataType: 'json',
+        let locationID = locations.data[0].id
 
-        success: function(data) {
+        $.ajax({
 
-            $('#addLocationLocation').val("")
+            data: {
+                'name': locationName,
+                'locationID': locationID,
+            },
+            url: 'php/insertLocation.php', 
+            dataType: 'json',
 
-        }
+            success: function(data) {
 
-    })
+                $('#addLocationLocation').val("")
 
+            }
+
+        })
+
+    }); 
 }
 
 function capitalizeFirstLetter(word) {
@@ -593,22 +599,30 @@ function removeDepartment() {
     $.getJSON(`php/getAllDepartments.php`, function (departments) {
 
         let departmentID = departments.data.filter(dep => dep.name == departmentName)[0].id
+        
+        if(departmentID <= 12){
+        
+            $('#depResponseMessage').text("Declined")
+        
+        } else {
+        
+            $.ajax({
 
-        $.ajax({
+                data: {
+                    'id': departmentID
+                },
+                url: 'php/deleteDepartmentByID.php', 
+                dataType: 'json',
 
-            data: {
-                'id': departmentID
-            },
-            url: 'php/deleteDepartmentByID.php', 
-            dataType: 'json',
+                success: function(data) {
 
-            success: function(data) {
+                    $('#removeDepartmentDepartment').find('option:eq(0)').prop('selected', true);
+        
+                }
 
-                $('#removeDepartmentDepartment').find('option:eq(0)').prop('selected', true);
-    
-            }
+            })
 
-        })
+        }
 
     }); 
 
@@ -618,21 +632,35 @@ function removeLocation() {
 
     let locationName = $('#removeLocationLocation').val()
 
-    $.ajax({
+    $.getJSON(`php/getAllLocations.php`, function (locations) {
 
-        data: {
-            'name': locationName
-        },
-        url: 'php/deleteLocation.php', 
-        dataType: 'json',
+        let locationID = locations.data.filter(loc => loc.name == locationName)[0].id
 
-        success: function(data) {
+        if(locationID <= 12){
+            
+            $('#locResponseMessage').text("Declined")
+        
+        } else {
 
-            $('#removeLocationLocation').find('option:eq(0)').prop('selected', true);
+            $.ajax({
+
+                data: {
+                    'name': locationName
+                },
+                url: 'php/deleteLocation.php', 
+                dataType: 'json',
+
+                success: function(data) {
+
+                    $('#removeLocationLocation').find('option:eq(0)').prop('selected', true);
+
+                }
+
+            })
 
         }
 
-    })
+    });
     
 }
 
@@ -870,13 +898,6 @@ function toggleConfirm(message, func) {
 
 function toggleConfirmDep(message, func) {
     
-    if (!event) var event = window.event;
-    event.cancelBubble = true;
-    if (event.stopPropagation) event.stopPropagation();
-
-
-    employeeID = $(event.target).closest(".buttons").siblings("form").find("#id").text();
-
     if ($('#confirmDep').css('display') == "none") {
 
         $('#confirmDep').show()
@@ -891,12 +912,9 @@ function toggleConfirmDep(message, func) {
             ${func.toString()};
             $('#depQuestion').hide()
             $('#depResponse').show()
-            
-            
-            $('#depResponseMessage').text('${addOrRemove}')
-            
 
-            
+            $('#depResponseMessage').text('${addOrRemove}')
+
             setTimeout(function(){
                 $('#confirmDep').hide();
                 
@@ -917,13 +935,6 @@ function toggleConfirmDep(message, func) {
 }
 
 function toggleConfirmLoc(message, func) {
-    
-    if (!event) var event = window.event;
-    event.cancelBubble = true;
-    if (event.stopPropagation) event.stopPropagation();
-
-
-    employeeID = $(event.target).closest(".buttons").siblings("form").find("#id").text();
 
     if ($('#confirmLoc').css('display') == "none") {
 

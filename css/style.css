@@ -766,7 +766,7 @@ ul {
     align-items: center !important;
 }
 
-#confirmResponse, #depResponse, #LocResponse {
+#confirmResponse, #depResponse, #locResponse {
 vertical-align: middle !important;
 line-height: 60px; 
 }
